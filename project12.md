@@ -10,7 +10,7 @@
   ```
 - Install `Copy Artifact` plugin. Dashboard -> Manage Plugins -> Goto `Available` tab -> Search for plugin -> Click `Install without restart`.
   ![Plugin Installed](images/001-jenkins-copy-artifacts-plugin.png)
-- Create new freestyle project `save_artifacts` and Configure trigger to build after `toolingCI` project build
+- Create new freestyle project `save_artifacts` and Configure trigger to build after `ansible` project build
   ![Copy Artifacts Config 1](images/002-jenkins-copy-artifacts-config1.png)
   ![Copy Artifacts Config 2](images/003-jenkins-copy-artifacts-config2.png)
 - Configure to copy artifact to `/home/ubuntu/ansible-config-artifact`
@@ -127,7 +127,7 @@
   ```
   git merge refactor
   ```
-- This should trigger the `toolingCI` pipeline on Jenkins and subsequently trigger the `save-artifact` pipeline. Which is meant to copy the artifact (all we've done above) to `/home/ubuntu/ansible-config-artifact` and should look like this:
+- This should trigger the `ansible` pipeline on Jenkins and subsequently trigger the `save-artifact` pipeline. Which is meant to copy the artifact (all we've done above) to `/home/ubuntu/ansible-config-artifact` and should look like this:
   ![Full Folder Structure](images/008-ansible-complete-structure.png)
 - SSH into the Jenkins-Ansible server
   ```
@@ -149,3 +149,6 @@
   ansible-playbook -i inventory/uat.yml playbooks/site.yml
   ```
   ![Playbook Success](images/010-ansible-playbook-success.png)
+- Check that Ansible executed all tasks adequately by opening up `http port` for webservers in EC2 and visit `<Web1-UAT-public-ip>/index.php` and `<Web2-UAT-public-ip>/index.php`
+  ![Config Success](images/011-ansible-uat-config-success.png)
+  ![Config Success](images/012-ansible-uat2-config-success.png)
